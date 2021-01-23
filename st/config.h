@@ -6,7 +6,8 @@
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
 //static char *font = "Fira-Code Mono:pixelsize=36:antialias=true:autohint=true";
-static char *font = "Liberation Mono:pixelsize=36:antialias=true:autohint=true";
+//static char *font = "Liberation Mono:pixelsize=42:antialias=true:autohint=true";
+static char *font = "Roboto Mono:pixelsize=42:antialias=true:autohint=true";
 static int borderpx = 2;
 
 /*
@@ -193,7 +194,7 @@ MouseKey mkeys[] = {
 
 
 /* Internal keyboard shortcuts. */
-#define MODKEY Mod1Mask
+#define MODKEY Mod4Mask
 #define TERMMOD (ControlMask|ShiftMask)
 
 static Shortcut shortcuts[] = {
@@ -202,9 +203,12 @@ static Shortcut shortcuts[] = {
 	{ ControlMask,          XK_Print,       toggleprinter,  {.i =  0} },
 	{ ShiftMask,            XK_Print,       printscreen,    {.i =  0} },
 	{ XK_ANY_MOD,           XK_Print,       printsel,       {.i =  0} },
-	{ TERMMOD,              XK_Prior,       zoom,           {.f = +1} },
-	{ TERMMOD,              XK_Next,        zoom,           {.f = -1} },
-	{ TERMMOD,              XK_Home,        zoomreset,      {.f =  0} },
+	{ ControlMask,          XK_equal,       zoom,           {.f = +5} },
+	{ ControlMask,          XK_minus,       zoom,           {.f = -5} },
+	{ TERMMOD,              XK_plus,        zoomreset,      {.f =  0} },
+	// { TERMMOD,              XK_Prior,       zoom,           {.f = +1} },
+	// { TERMMOD,              XK_Next,        zoom,           {.f = -1} },
+	// { TERMMOD,              XK_Home,        zoomreset,      {.f =  0} },
 	{ TERMMOD,              XK_C,           clipcopy,       {.i =  0} },
 	{ TERMMOD,              XK_V,           clippaste,      {.i =  0} },
 	{ TERMMOD,              XK_Y,           clippaste,      {.i =  0} },
