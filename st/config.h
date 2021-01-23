@@ -7,7 +7,8 @@
  */
 //static char *font = "Fira-Code Mono:pixelsize=36:antialias=true:autohint=true";
 //static char *font = "Liberation Mono:pixelsize=42:antialias=true:autohint=true";
-static char *font = "Roboto Mono:pixelsize=42:antialias=true:autohint=true";
+static char *font = "Roboto Mono:pixelsize=36:antialias=true:autohint=true"; // dwm
+//static char *font = "Roboto Mono:pixelsize=24:antialias=true:autohint=true";   // dwl
 static int borderpx = 2;
 
 /*
@@ -93,7 +94,7 @@ char *termname = "st-256color";
  *
  *	stty tabs
  */
-unsigned int tabspaces = 8;
+unsigned int tabspaces = 4;
 
 /* bg opacity */
 float alpha = 0.8;

@@ -1,4 +1,5 @@
 /* See LICENSE file for copyright and license details. */
+#include "/usr/include/X11/XF86keysym.h"
 
 /* appearance */
 static const unsigned int borderpx  = 2;        /* border pixel of windows */
@@ -10,16 +11,15 @@ static const char *fonts[]          = {
     "Roboto Mono:size=12:antialias=true:autohint=true" 
 };
 static const char dmenufont[]       = "monospace:size=10";
-static const char col_gray1[]       = "#222222";
-static const char col_gray2[]       = "#444444";
-static const char col_gray3[]       = "#bbbbbb";
-static const char col_gray4[]       = "#eeeeee";
-static const char col_cyan[]        = "#005577";
+static const char col_gray1[]       = "#222222"; 	//	black bar color
+static const char col_gray2[]       = "#444444"; 	// 	nothing ?
+static const char col_gray3[]       = "#bbbbbb"; 	// 	font color
+static const char col_gray4[]       = "#eeeeee"; 	// 	current tab/client font color
+static const char col_cyan[]        = "#005577"; 	// 	current border color
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
 	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
-	//[SchemeTitle]  = { col_gray4, col_cyan,  col_cyan  },
 	[SchemeStatus]  = { col_gray3, col_gray1,  "#000000"  }, // Statusbar right {text,background,not used but cannot be empty}
 	[SchemeTagsSel]  = { col_gray4, col_cyan,  "#000000"  }, // Tagbar left selected {text,background,not used but cannot be empty}
 	[SchemeTagsNorm]  = { col_gray3, col_gray1,  "#000000"  }, // Tagbar left unselected {text,background,not used but cannot be empty}
@@ -53,8 +53,17 @@ static const Layout layouts[] = {
 };
 
 /* screen brightness */
-//static const char *brightness_up[]  =   { "brightness", "up", NULL  };
-//static const char *brightness_down[]  = { "brightness", "down", NULL  };
+static const char *brightness_up[]  =   { "xbacklight", "-inc", "10", NULL  };
+static const char *brightness_down[]  =   { "xbacklight", "-dec", "10", NULL  };
+
+/* volume */
+static const char *mutecmd[] = { "amixer", "-q", "set", "Master", "toggle", NULL };
+static const char *volupcmd[] = { "amixer", "-q", "set", "Master", "5%+", "unmute", NULL };
+static const char *voldowncmd[] = { "amixer", "-q", "set", "Master", "5%-", "unmute", NULL };
+//static const char *miccmd[] = { "amixer", "set", "Capture", "toggle", NULL };
+
+
+
 
 
 /* key definitions */
@@ -109,8 +118,11 @@ static Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
-	//{ 0,        XKB_KEY_XF86MonBrightnessUp,   spawn, 	   {.v = brightness_up} },
-	//{ 0,        XKB_KEY_XF86MonBrightnessDown, spawn, 	   {.v = brightness_down} },
+	{ 0,        XF86XK_MonBrightnessUp,        spawn, 	   {.v = brightness_up} },
+	{ 0,        XF86XK_MonBrightnessDown,      spawn, 	   {.v = brightness_down} },
+	{ 0, 	    XF86XK_AudioMute, 		   spawn, 	   {.v = mutecmd } },
+	{ 0, 	    XF86XK_AudioLowerVolume,       spawn, 	   {.v = voldowncmd } },
+	{ 0, 	    XF86XK_AudioRaiseVolume, 	   spawn, 	   {.v = volupcmd } },
 
 
 
