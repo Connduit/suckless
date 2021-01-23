@@ -7,8 +7,12 @@
  */
 //static char *font = "Fira-Code Mono:pixelsize=36:antialias=true:autohint=true";
 //static char *font = "Liberation Mono:pixelsize=42:antialias=true:autohint=true";
-static char *font = "Roboto Mono:pixelsize=36:antialias=true:autohint=true"; // dwm
-//static char *font = "Roboto Mono:pixelsize=24:antialias=true:autohint=true";   // dwl
+static char *font = "Roboto Mono:pixelsize=36:antialias=true:autohint=true";
+/* Spare fonts */
+static char *font2[] = {
+/*	"Inconsolata for Powerline:pixelsize=12:antialias=true:autohint=true", */
+	"Hack Nerd Font Mono:pixelsize=12:antialias=true:autohint=true",
+};
 static int borderpx = 2;
 
 /*
@@ -178,7 +182,7 @@ static uint forcemousemod = ShiftMask;
  * Internal mouse shortcuts.
  * Beware that overloading Button1 will disable the selection.
  */
-
+const unsigned int mousescrollincrement = 2;
 static MouseShortcut mshortcuts[] = {
 	/* mask                 button   function        argument       release */
 	{ ShiftMask,            Button4, kscrollup,      {.i = 1} },
@@ -189,8 +193,8 @@ static MouseShortcut mshortcuts[] = {
 };
 MouseKey mkeys[] = {
 	/* button               mask            function        argument */
-	{ Button4,              ShiftMask,      kscrollup,      {.i =  1} },
-	{ Button5,              ShiftMask,      kscrolldown,    {.i =  1} },
+	{ Button4,              ShiftMask,      kscrollup,      {.i =  mousescrollincrement} },
+	{ Button5,              ShiftMask,      kscrolldown,    {.i =  mousescrollincrement} },
 };
 
 

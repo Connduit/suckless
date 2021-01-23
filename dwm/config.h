@@ -8,7 +8,9 @@ static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const char statussep         = ';';      /* separator between status bars */
 static const char *fonts[]          = { 
-    "Roboto Mono:size=12:antialias=true:autohint=true" 
+    "Roboto Mono:size=12:antialias=true:autohint=true",
+    "FontAwesome:size=12:antialias=true:autohint=true",
+    "-wuncon-siji-medium-r-normal--10-100-75-75-c-80-iso10646-1",  /* For Iconic Glyphs */
 };
 static const char dmenufont[]       = "monospace:size=10";
 static const char col_gray1[]       = "#222222"; 	//	black bar color
