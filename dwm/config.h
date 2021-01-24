@@ -1,5 +1,5 @@
 /* See LICENSE file for copyright and license details. */
-#include "/usr/include/X11/XF86keysym.h"
+#include "X11/XF86keysym.h"
 
 /* appearance */
 static const unsigned int borderpx  = 2;        /* border pixel of windows */
@@ -8,9 +8,8 @@ static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const char statussep         = ';';      /* separator between status bars */
 static const char *fonts[]          = { 
-    "Roboto Mono:size=12:antialias=true:autohint=true",
-    "FontAwesome:size=12:antialias=true:autohint=true",
-    "-wuncon-siji-medium-r-normal--10-100-75-75-c-80-iso10646-1",  /* For Iconic Glyphs */
+    "Roboto Mono:size=8:antialias=true:autohint=true",
+    "Hack Nerd Font Mono:size=8:antialias=true:autohint=true",
 };
 static const char dmenufont[]       = "monospace:size=10";
 static const char col_gray1[]       = "#222222"; 	//	black bar color
@@ -39,7 +38,7 @@ static const Rule rules[] = {
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
-	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
+	//{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
 };
 
 /* layout(s) */
@@ -59,9 +58,9 @@ static const char *brightness_up[]  =   { "xbacklight", "-inc", "10", NULL  };
 static const char *brightness_down[]  =   { "xbacklight", "-dec", "10", NULL  };
 
 /* volume */
-static const char *mutecmd[] = { "amixer", "-q", "set", "Master", "toggle", NULL };
-static const char *volupcmd[] = { "amixer", "-q", "set", "Master", "5%+", "unmute", NULL };
-static const char *voldowncmd[] = { "amixer", "-q", "set", "Master", "5%-", "unmute", NULL };
+//static const char *mutecmd[] = { "amixer", "-q", "set", "Master", "toggle", NULL };
+//static const char *volupcmd[] = { "amixer", "-q", "set", "Master", "5%+", "unmute", NULL };
+//static const char *voldowncmd[] = { "amixer", "-q", "set", "Master", "5%-", "unmute", NULL };
 //static const char *miccmd[] = { "amixer", "set", "Capture", "toggle", NULL };
 
 
@@ -96,8 +95,8 @@ static Key keys[] = {
 	{ MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
-	{ MODKEY,                       XK_Return, zoom,           {0} },
-	{ MODKEY,                       XK_Tab,    view,           {0} },
+	{ MODKEY,                       XK_Return, zoom,           {0} }, 			// switches roles of master and slave
+	{ MODKEY,                       XK_Tab,    view,           {0} }, 			// switches between most recent tab
 	{ MODKEY,             		XK_q,      killclient,     {0} },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
@@ -122,12 +121,14 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
 	{ 0,        XF86XK_MonBrightnessUp,        spawn, 	   {.v = brightness_up} },
 	{ 0,        XF86XK_MonBrightnessDown,      spawn, 	   {.v = brightness_down} },
-	{ 0, 	    XF86XK_AudioMute, 		   spawn, 	   {.v = mutecmd } },
-	{ 0, 	    XF86XK_AudioLowerVolume,       spawn, 	   {.v = voldowncmd } },
-	{ 0, 	    XF86XK_AudioRaiseVolume, 	   spawn, 	   {.v = volupcmd } },
-
-
-
+	//{ 0, 	    XF86XK_AudioMute, 		   spawn, 	   {.v = mutecmd } },
+	//{ 0, 	    XF86XK_AudioLowerVolume,       spawn, 	   {.v = voldowncmd } },
+	//{ 0, 	    XF86XK_AudioRaiseVolume, 	   spawn, 	   {.v = volupcmd } },
+	//{ 0, XF86XK_AudioMute,		spawn,		SHCMD("pamixer -t; kill -44 $(pidof dwmblocks)") },
+	{ 0, XF86XK_AudioMute,	spawn,		SHCMD("pamixer --allow-boost -i 3; pkill -RTMIN+10 dwmblocks") },
+	{ 0, XF86XK_AudioRaiseVolume,	spawn,		SHCMD("pamixer --allow-boost -i 3; pkill -RTMIN+10 dwmblocks") },
+	{ 0, XF86XK_AudioLowerVolume,	spawn,		SHCMD("pamixer --allow-boost -d 3; pkill -RTMIN+10 dwmblocks") },
+	//{ 0, XF86XK_AudioLowerVolume,	spawn,		SHCMD("pamixer --allow-boost -d 3; kill -44 $(pidof dwmblocks)") },
 };
 
 /* button definitions */
