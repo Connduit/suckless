@@ -6,7 +6,6 @@ static const unsigned int borderpx  = 2;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char statussep         = ';';      /* separator between status bars */
 static const char *fonts[]          = { 
     "Roboto Mono:size=8:antialias=true:autohint=true",
     "Hack Nerd Font Mono:size=8:antialias=true:autohint=true",
@@ -58,12 +57,6 @@ static const char *brightness_up[]  =   { "xbacklight", "-inc", "10", NULL  };
 static const char *brightness_down[]  =   { "xbacklight", "-dec", "10", NULL  };
 
 /* volume */
-//static const char *mutecmd[] = { "amixer", "-q", "set", "Master", "toggle", NULL };
-//static const char *volupcmd[] = { "amixer", "-q", "set", "Master", "5%+", "unmute", NULL };
-//static const char *voldowncmd[] = { "amixer", "-q", "set", "Master", "5%-", "unmute", NULL };
-//static const char *miccmd[] = { "amixer", "set", "Capture", "toggle", NULL };
-
-
 
 
 
@@ -138,7 +131,9 @@ static Button buttons[] = {
 	{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
 	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
 	{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
-	{ ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },
+	{ ClkStatusText,        0,              Button1,        sigdwmblocks,   {.i = 1} },
+	{ ClkStatusText,        0,              Button2,        sigdwmblocks,   {.i = 2} },
+	{ ClkStatusText,        0,              Button3,        sigdwmblocks,   {.i = 3} },
 	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
 	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
 	{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },
