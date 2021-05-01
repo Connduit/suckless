@@ -69,8 +69,8 @@ static const char *termcmd[]  = { "st", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
-	{ MODKEY,                       XK_n,      spawn,          {.v = dmenucmd } },
-	{ MODKEY,             		XK_space,  spawn,          {.v = termcmd } },
+	{ MODKEY,             		XK_n, 	   spawn,          {.v = termcmd } },
+	{ MODKEY,                       XK_space,  spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
