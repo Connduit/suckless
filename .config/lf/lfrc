@@ -1,1 +1,21 @@
-# init
+# ~/.config/lf/lfrc
+
+# Open files with appropriate applications
+cmd open ${{
+	if [ -f "$f"  ]; then
+		case "$f" in
+			*.pdf) zathura "$f" ;;
+			*.png|*.jpg|*.jpeg) nohup feh "$f" >/dev/null 2>&1 & ;;
+			*) $EDITOR "$f" ;;
+		esac
+	fi
+
+}}
+
+
+# Map Enter to the custom open command
+map <Enter> open
+
+# Delete selected file(s)
+map D delete
+
