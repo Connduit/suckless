@@ -96,44 +96,65 @@ unsigned int tabspaces = 4;
 /* bg opacity */
 float alpha = 0.8;
 
+
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
-	/* 8 normal colors */
-	"#3b4252", /* black   */
-	"#bf616a", /* red     */
-	"#a3be8c", /* green   */
-	"#ebcb8b", /* yellow  */
-	"#81a1c1", /* blue    */
-	"#b48ead", /* magenta */
-	"#88c0d0", /* cyan    */
-	"#e5e9f0", /* white   */
+	// "#160909" // very dark black (with a tiny hint of red)
+	// "#756160" // greyish tan (tiny red)
+	// "#A03736" // dark moderate red
+	// "#D33E3A" // moderate red
+	// "#C63F40" // looks the same as above
+	// "#915558" // Mostly desaturated dark red
+	// "#F64D4B" // soft (brightish? ) red
+	// "#c4c1c1" // light grey 
+	// "#6c5959" // dark grayish red/brown
+	// "#756160" // greyish tan (tiny red)
+	// "#A03736" // dark moderate red
+	// "#D33E3A" // moderate red
+	// "#C63F40" // looks the same as above
+	// "#915558" // Mostly desaturated dark red
+	// "#F64D4B" // soft (brightish? ) red
+	// "#c4c1c1" // light grey 
+
+
+	[0] = "#160909", /* black   */
+	[1] = "#756160", /* greyish tan     */
+	[2] = "#A03736", /* green   */
+	[3] = "#D33E3A", /* yellow  */
+	[4] = "#C63F40", /* blue    */
+	[5] = "#915558", /* magenta */
+	[6] = "#F64D4B", /* cyan    */
+	[7] = "#c4c1c1", /* white   */
 
 	/* 8 bright colors */
-	"#4c566a", /* black   */
-	"#bf616a", /* red     */
-	"#a3be8c", /* green   */
-	"#ebcb8b", /* yellow  */
-	"#81a1c1", /* blue    */
-	"#b48ead", /* magenta */
-	"#8fbcbb", /* cyan    */
-	"#eceff4", /* white   */
+	[8]  = "#6c5959",  /* greyish-tan with a hint of red   */
+	[9]  = "#756160",  /* red     */
+	[10] = "#A03736", /* green   */
+	[11] = "#D33E3A", /* yellow  */
+	[12] = "#C63F40", /* blue    */
+	[13] = "#915558", /* magenta */
+	[14] = "#F64D4B", /* cyan    */
+	[15] = "#c4c1c1", /* white   */
+
+	/* special colors */
+	[256] = "#160909", /* background */
+	[257] = "#c4c1c1", /* foreground */
+	[258] = "#c4c1c1",     /* cursor */
 
 	[255] = 0,
 
 	/* more colors can be added after 255 to use with DefaultXX */
-	"#2e3440", /* background */
-	"#d8dee9", /* foreground */
+	//"#2e3440", /* background */
+	//"#d8dee9", /* foreground */
 };
 
 
-/*
- * Default colors (colorname index)
- * foreground, background, cursor, reverse cursor
- */
-unsigned int defaultfg = 257;
-unsigned int defaultbg = 256;
-static unsigned int defaultcs = 257;
-static unsigned int defaultrcs = 256;
+/* Default colors (colorname index)
+ * foreground, background, cursor */
+ unsigned int defaultbg = 0;
+ unsigned int defaultfg = 257;
+ unsigned int defaultcs = 258;
+ unsigned int defaultrcs= 258;
 
 /*
  * Default shape of cursor
@@ -178,8 +199,8 @@ static uint forcemousemod = ShiftMask;
 const unsigned int mousescrollincrement = 1;
 static MouseShortcut mshortcuts[] = {
 	/* mask                 button   function        argument       release */
-    	{ShiftMask, 		Button4, kscrollup, 	 {.i = 1} },
-    	{ShiftMask, 		Button5, kscrolldown, 	 {.i = 1} },
+	{ShiftMask, 		Button4, kscrollup, 	 {.i = 1} },
+	{ShiftMask, 		Button5, kscrolldown, 	 {.i = 1} },
 	{ XK_ANY_MOD,           Button2, selpaste,       {.i = 0},      1 },
 	//{ XK_ANY_MOD,           Button4, ttysend,        {.s = "\031"} },
 	//{ XK_ANY_MOD,           Button5, ttysend,        {.s = "\005"} },
