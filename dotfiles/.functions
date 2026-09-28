@@ -1,0 +1,76 @@
+
+# makes dir and then enters made dir
+function mkcd()
+{
+    mkdir -p "$1" && cd "$1" || return
+}
+
+# Determine size of file or total size of a directory
+function fs()
+{
+    if du -b /dev/null > /dev/null 2>&1; then
+        local arg=-sbh;
+    else
+        local arg=-sh;
+    fi
+    if [[ -n "$*" ]]; then
+        du $arg -- "$@";
+    else
+        du $arg .[^.]* ./*;
+    fi;
+}
+
+# finds hidden/.files in current dir
+function dotfind()
+{
+    # This will produce messy results if $LANG is set to anything less than UTF-8 and have
+    # filenames with "weird" characters
+    find . -maxdepth 1 -type f -name ".*" -exec realpath --relative-to . {} \; | sort
+}
+
+# watch proc and subproc
+function ptree()
+{
+    if [[ "$1" =~ [0-9]+ ]]; then
+        watch -d -n 0.1 "ps --forest -o pid=,tty=,stat=,time=,cmd= -g $(ps -o sid= -p "$1")"
+    else
+        watch -d -n 0.1 "ps --forest -o pid=,tty=,stat=,time=,cmd= -g $(ps -o sid= -p "$(pgrep "$1")")"
+    fi
+}
+
+# verbose tree
+function vtree()
+{
+    if [ -z "$1" ]; then
+        tree -CFfpathlug --du "$PWD"
+    else
+        tree -CFfpathlug --du "$1"
+    fi
+}
+
+# colored warnings/errors in make
+# function make()
+# {
+#     pathpat="^.*:[0-9]+"
+#     ccred=$(echo -e "\033[0;31m")
+#     ccyellow=$(echo -e "\033[0;33m")
+#     ccend=$(echo -e "\033[0m")
+#     /usr/bin/make "$@" 2>&1 | sed -E -e "/[Ee]rror[: ]/ s%$pathpat%$ccred&$ccend%g" -e "/[Ww]arning[: ]/ s%$pathpat%$ccyellow&$ccend%g"
+#     return "${PIPESTATUS[0]}"
+# }
+
+setws()
+{
+    if [ "$#" -ne 1 ]; then
+        gr=$(pwd)
+        export GIT_ROOT="$gr"
+        export ROOT_OFFSET="$gr"
+        echo "GIT_ROOT and ROOT_OFFSET set to: $GIT_ROOT"
+        return
+    fi
+
+    export GIT_ROOT="$1"
+    export ROOT_OFFSET="$1"
+
+    echo "GIT_ROOT and ROOT_OFFSET set to: $GIT_ROOT"
+}
