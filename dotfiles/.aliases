@@ -1,0 +1,89 @@
+
+
+
+alias ..="cd .."
+alias ...="cd ../../"
+alias ....="cd ../../../"
+alias .....="cd ../../../../"
+alias ......="cd ../../../../../"
+
+alias va="vim ~/.dotfiles/.aliases"
+alias ve="vim ~/.dotfiles/.exports"
+alias vf="vim ~/.dotfiles/.functions"
+alias vp="vim ~/.dotfiles/.bash_prompt"
+alias vb="vim ~/.dotfiles/.bashrc_TODO" # TODO: or .zshrc?
+alias vv="vim ~/.dotfiles/.vimrc"
+
+alias vimp="vim -p"
+alias repos="cd /path/to/repos" # TODO
+alias reps="repos"
+alias doc="cd ~/Documents"
+alias docs="doc"
+alias dls="cd ~/Downloads"
+alias notes="cd ~/Documents/notes"
+alias scripts="cd ~/scripts"
+
+alias ga="git add"
+alias gs="git status"
+alias gd="git diff"
+alias gb="git branch"
+alias gl="git pull"
+alias gp="git push"
+alias gco="git checkout"
+alias gc="git commit -m"
+alias gf="git fetch"
+# git branch -m # rename
+# git diff HEAD^ # diff prev version of branch
+# git diff HEAD~1 HEAD # git diff immediate previous commit
+# git switch # similar to git checkout
+# git reset
+# git restore
+
+alias c="clear"
+
+# colorflag="--color"
+# export LS_COLORS=TODO
+
+alias l="ls -lF ${colorflag}"
+alias la="ls -lAF ${colorflag}"
+alias lsd="ls -lF ${colorflag} | grep --color=never '^d'" # ls directories only
+alias ls="command ls ${colorflag}" # ls always uses colorflag
+
+alias grep="grep --color=auto"
+alias fgrep="fgrep --color=auto"
+alias egrep="egrep --color=auto"
+
+alias sudo='sudo '
+
+alias reload="exec ${SHELL} -l"
+alias rl="reload"
+
+alias path='echo -e ${PATH//:/\\n}'
+alias gdbtui="gdb --tui"
+
+alias df="df -h"
+alias du="du -h"
+
+alias m="make"
+alias mc="make clean"
+alias mi="make install"
+
+alias d.='find . -mindepth 1 -maxdepth 1 -type d -name "\.*" | sed "s/\.\///" | sort | column' # show hidden dirs
+
+# TODO: move to .dotfiles/.functions
+# checks for compiler errors
+function checkfile() 
+{
+    grep --color "undefined reference\|error:\|needed by.*not found\|No rule to make target\|cannot find\|Missing:\s*[1-9][0-9]*\|fatal\|No such file or directory\|Unrecognized \|\-I\ \-\|make.* Error \|overriding\|CMake Error\|INSTALL connot find" $@
+}
+
+alias r="cd \${GIT_ROOT}/"
+
+alias qf="rpm -qf"
+alias qi="rpm -qi"
+alias qa="rpm -qa"
+alias ql="rpm -ql"
+
+alias f="find . -iname"
+
+
